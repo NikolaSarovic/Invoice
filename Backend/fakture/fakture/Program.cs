@@ -1,3 +1,4 @@
+using fakture.Controllers.Products.ProductsRepository;
 using fakture.Controllers.User;
 using fakture.Controllers.User.UserRepository;
 using fakture.Models;
@@ -50,6 +51,7 @@ builder.Services.AddAuthentication(options =>
 
 //Dependecy Injection
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductsRepository,ProductsRepository>();
 
 //swagger podesavanja
 builder.Services.AddSwaggerGen(c =>
