@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+n/bKYiP1doWaeAsvBA7tCasjfs6sBvXydp6MmpmkPRgI0IUOGLk/0/7aZy5Iqa8Ij49tlTUYxq97M+l1d7Ksw==",
+  "dgSpecHash": "YWzx3J/7ZiR/sk2mGicG9abs9gUdF7YJDkRgjdiKaHjB2FiH6Ua1Yk1VGm38Rv/+Qg07s8IEg4erK7aiL54opw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nikola\\Desktop\\AppFakture\\Backend\\fakture\\fakture\\fakture.csproj",
+  "projectFilePath": "C:\\Users\\Nikola\\Desktop\\FaktureApp\\Backend\\fakture\\fakture\\fakture.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nikola\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Nikola\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
