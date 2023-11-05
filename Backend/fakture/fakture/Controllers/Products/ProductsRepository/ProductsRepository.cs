@@ -72,7 +72,7 @@ namespace fakture.Controllers.Products.ProductsRepository
         {
             var artikalToUpdate = await _dbcontext.Artikli.Where(x => x.ArtikalId == upArtikal.ArtikalId).FirstAsync();
             artikalToUpdate.Kolicina = upArtikal.Kolicina;
-            artikalToUpdate.NazivArtikla = upArtikal.Naziv;
+            artikalToUpdate.NazivArtikla = upArtikal.NazivArtikla;
             artikalToUpdate.Cijena = upArtikal.Cijena;
             artikalToUpdate.PostoRabata = upArtikal.PostoRabata;
              _dbcontext.Update(artikalToUpdate);
@@ -82,7 +82,7 @@ namespace fakture.Controllers.Products.ProductsRepository
         {
             Artikal artikal = new Artikal();
             artikal.Kolicina = upArtikal.Kolicina;
-            artikal.NazivArtikla = upArtikal.Naziv;
+            artikal.NazivArtikla = upArtikal.NazivArtikla;
             artikal.Cijena = upArtikal.Cijena;
             artikal.PostoRabata = upArtikal.PostoRabata;
             artikal.Faktura = faktura;
