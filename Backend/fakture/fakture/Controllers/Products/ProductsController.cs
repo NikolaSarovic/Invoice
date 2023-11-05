@@ -52,5 +52,20 @@ namespace fakture.Controllers.Products
 
 
         }
+        [Authorize]
+        [HttpPost("Products/PostInvoice")]
+        public async Task<ActionResult<FakturaDto>> PostFaktura([FromBody] CreateFakturaDto newFaktura)
+        {
+            string? userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var result = await _repo.PostFaktura(newFaktura, userId);
+            return Ok(result);
+        }
+        [Authorize]
+        [HttpPut("Products/PutInvoice")]
+        public async Task<ActionResult<FakturaDto>> PutFaktura([FromBody] PutFakturaDto newFaktura)
+        {
+            var result = await _repo.PutFaktura(newFaktura);
+            return Ok(result);
+        }
     }
 }

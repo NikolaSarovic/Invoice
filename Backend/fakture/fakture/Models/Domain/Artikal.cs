@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using fakture.Controllers.Products.ProductsDtos;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace fakture.Models.Domain
@@ -15,5 +16,19 @@ namespace fakture.Models.Domain
         [ForeignKey(nameof(Faktura))]
         public int FakturaId { get; set; }
         public Faktura Faktura { get; set; }
+
+        public Artikal()
+        {
+
+        }
+        public Artikal(CreateArtikalDto newArtikal,Faktura faktura)
+        {
+            this.Kolicina = newArtikal.Kolicina;
+            this.Cijena = newArtikal.Cijena;
+            this.NazivArtikla = newArtikal.NazivArtikla;
+            this.PostoRabata = newArtikal.PostoRabata;
+            this.Faktura = faktura;
+
+        }
     }
 }
