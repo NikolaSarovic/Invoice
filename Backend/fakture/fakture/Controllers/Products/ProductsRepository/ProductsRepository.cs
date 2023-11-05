@@ -12,14 +12,15 @@ namespace fakture.Controllers.Products.ProductsRepository
             _dbcontext = dbcontex;
         }
 
-        public async Task<ArtikalDto> DeleteArtikal(int artikalId)
+        public async Task<ResponeDto> DeleteArtikal(int artikalId)
         {
             var artikal = await _dbcontext.Artikli.Where(x => x.ArtikalId == artikalId).FirstOrDefaultAsync();
             if (artikal == null)
                 return null;
             _dbcontext.Remove(artikal);
-            await _dbcontext.SaveChangesAsync();
-            return new ArtikalDto(artikal);
+            if (await _dbcontext.SaveChangesAsync() > 0)
+                return new ResponeDto { Status="Succes",Message="Artikal uspjesno obrisan"};
+            return null;
         }
 
         public async Task<IEnumerable<FakturaDto>> GetFakture(string userId)
@@ -39,14 +40,15 @@ namespace fakture.Controllers.Products.ProductsRepository
             return faktura;
         }
 
-        public async  Task<FakturaDto> DeleteFaktura(int fakturaId)
+        public async  Task<ResponeDto> DeleteFaktura(int fakturaId)
         {
             var faktura = await _dbcontext.Fakture.Where(x => x.FakturaId == fakturaId).FirstOrDefaultAsync();
             if(faktura==null)
                return null;
             _dbcontext.Remove(faktura);
-            await _dbcontext.SaveChangesAsync();
-            return new FakturaDto(faktura);
+           if( await _dbcontext.SaveChangesAsync()>0)
+                return new ResponeDto { Status = "Succes", Message = "Faktura uspjesno obrisana" };
+            return null;
 
         }
     }

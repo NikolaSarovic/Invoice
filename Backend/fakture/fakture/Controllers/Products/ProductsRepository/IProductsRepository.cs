@@ -6,7 +6,7 @@ namespace fakture.Controllers.Products.ProductsRepository
     {
         public Task<IEnumerable<FakturaDto>> GetFakture(string userId);
         public Task<FakturaDto> GetFakturaById(int fakturaId);
-        public Task<ArtikalDto> DeleteArtikal(int artikalId);
-        public Task<FakturaDto> DeleteFaktura(int fakturaId);
+        public Task<ResponeDto> DeleteArtikal(int artikalId);
+        public Task<ResponeDto> DeleteFaktura(int fakturaId);
     }
 }

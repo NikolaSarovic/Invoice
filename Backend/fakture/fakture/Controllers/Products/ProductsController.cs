@@ -1,4 +1,5 @@
-﻿using fakture.Controllers.Products.ProductsDtos;
+﻿using Azure;
+using fakture.Controllers.Products.ProductsDtos;
 using fakture.Controllers.Products.ProductsRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,22 +34,20 @@ namespace fakture.Controllers.Products
         }
         [Authorize]
         [HttpDelete("Products/DeleteItem")]
-        public async Task<ActionResult<ArtikalDto>> DeleteArtikal(int artikalId)
+        public async Task<ActionResult<ResponeDto>> DeleteArtikal(int artikalId)
         {
             var result = await _repo.DeleteArtikal(artikalId);
             if (result == null)
-            {
-                return BadRequest("Artikal ne postoji");
-            }
+                return BadRequest(new ResponeDto { Status = "Error", Message = "Nije moguće izvršiti akciju!" });
             return Ok(result);
         }
         [Authorize]
         [HttpDelete("Products/DeleteInvoice")]
-        public async Task<ActionResult<ArtikalDto>> DeleteFaktura(int fakturaId)
+        public async Task<ActionResult<ResponeDto>> DeleteFaktura(int fakturaId)
         {
             var result = await _repo.DeleteFaktura(fakturaId);
             if (result == null)
-                return BadRequest("Nema te fakture");
+                return BadRequest(new ResponeDto { Status = "Error", Message = "Nije moguće izvršiti akciju!" });
             return Ok(result);
 
 
