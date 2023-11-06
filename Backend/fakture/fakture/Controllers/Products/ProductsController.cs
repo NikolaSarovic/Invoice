@@ -61,10 +61,24 @@ namespace fakture.Controllers.Products
             return Ok(result);
         }
         [Authorize]
+        [HttpPost("Products/PostItem")]
+        public async Task<ActionResult<FakturaDto>> PostArtikal([FromBody] CreateArtikalDto art, int fakturaId)
+        {
+            var result = await _repo.CreateArtikal(art, fakturaId);
+            return Ok(result);
+        }
+        [Authorize]
         [HttpPut("Products/PutInvoice")]
         public async Task<ActionResult<FakturaDto>> PutFaktura([FromBody] PutFakturaDto newFaktura)
         {
             var result = await _repo.PutFaktura(newFaktura);
+            return Ok(result);
+        }
+        [Authorize]
+        [HttpPut("Products/PutItem")]
+        public async Task<ActionResult<FakturaDto>> UpdateArtikal([FromBody] PutArtikalDto art)
+        {
+            var result = await _repo.PutArtikal(art);
             return Ok(result);
         }
     }
