@@ -1,4 +1,5 @@
-﻿using fakture.Models.Domain;
+﻿using fakture.Controllers.Services;
+using fakture.Models.Domain;
 
 namespace fakture.Controllers.Products.ProductsDtos
 {
@@ -9,6 +10,7 @@ namespace fakture.Controllers.Products.ProductsDtos
         public int Kolicina { get; set; }
         public float Cijena { get; set; }
         public float PostoRabata { get; set; }
+        public CalculationDto Calculationdto { get; set; }
 
         public ArtikalDto(Artikal dbArtikal)
         {
@@ -17,6 +19,8 @@ namespace fakture.Controllers.Products.ProductsDtos
             Kolicina = dbArtikal.Kolicina;
             Cijena = dbArtikal.Cijena;
             PostoRabata = dbArtikal.PostoRabata;
+
+            Calculationdto = new Calculation().ArtikalCalculation(dbArtikal);
 
         }
     }

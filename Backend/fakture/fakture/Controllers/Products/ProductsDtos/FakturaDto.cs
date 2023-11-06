@@ -1,4 +1,5 @@
 ﻿
+using fakture.Controllers.Services;
 using fakture.Models.Domain;
 
 namespace fakture.Controllers.Products.ProductsDtos
@@ -10,6 +11,7 @@ namespace fakture.Controllers.Products.ProductsDtos
         public string Datum { get; set; }
         public string Partner { get; set; }
         public float PostoRabata { get; set; }
+        public CalculationDto Calculationdto { get; set; }
         public IEnumerable<ArtikalDto> Artikli { get; set; }
 
         public FakturaDto(Faktura dbFaktura)
@@ -19,6 +21,8 @@ namespace fakture.Controllers.Products.ProductsDtos
             Datum = dbFaktura.Datum.ToString("dd/M/yyyy");
             Partner = dbFaktura.Partner;
             PostoRabata = dbFaktura.PostoRabata;
+
+            Calculationdto = new Calculation().FakturaCalculation(dbFaktura);
             Artikli = dbFaktura.Artikli.Select(x => new ArtikalDto(x));
             
 
