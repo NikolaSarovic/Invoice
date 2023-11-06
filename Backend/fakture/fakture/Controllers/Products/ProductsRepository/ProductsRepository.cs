@@ -3,6 +3,7 @@ using fakture.Models;
 using fakture.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Runtime.InteropServices;
 
 namespace fakture.Controllers.Products.ProductsRepository
 {
@@ -31,17 +32,7 @@ namespace fakture.Controllers.Products.ProductsRepository
             return faktura;
         }
 
-        public async  Task<ResponeDto> DeleteFaktura(int fakturaId)
-        {
-            var faktura = await _dbcontext.Fakture.Where(x => x.FakturaId == fakturaId).FirstOrDefaultAsync();
-            if(faktura==null)
-               return null;
-            _dbcontext.Remove(faktura);
-           if( await _dbcontext.SaveChangesAsync()>0)
-                return new ResponeDto { Status = "Succes", Message = "Faktura uspjesno obrisana" };
-            return null;
-
-        }
+        
 
         public async Task<FakturaDto> PostFaktura(CreateFakturaDto newFaktura, string userId)
         {
@@ -57,37 +48,38 @@ namespace fakture.Controllers.Products.ProductsRepository
 
         public async Task<FakturaDto> PutFaktura(PutFakturaDto upadateFaktura)
         {
-            var faktura = await _dbcontext.Fakture.Where(x => x.FakturaId == upadateFaktura.FakturaId).FirstAsync();
+            var faktura = await _dbcontext.Fakture.Where(x => x.FakturaId == upadateFaktura.FakturaId).FirstOrDefaultAsync();
             faktura.BrojFakture = upadateFaktura.BrojFakture;
             faktura.Datum = DateTime.Parse(upadateFaktura.Datum);
             faktura.Partner = upadateFaktura.Partner;
             faktura.PostoRabata = upadateFaktura.PostoRabata;
-            foreach (var art in upadateFaktura.Artikli.Where(x => x.ArtikalId != null))
-                await UpdateArtikal(art, faktura);
-            foreach (var art in upadateFaktura.Artikli.Where(x => x.ArtikalId == null))
-                await CreateArtikal( art,faktura);
+            faktura.Artikli = await _dbcontext.Artikli.Where(x => x.FakturaId == upadateFaktura.FakturaId).ToListAsync();
+            _dbcontext.Update(faktura);
+            _dbcontext.SaveChangesAsync();
+            return new FakturaDto(faktura);
+
+        }
+        public async Task<ResponeDto> DeleteFaktura(int fakturaId)
+        {
+            var faktura = await _dbcontext.Fakture.Where(x => x.FakturaId == fakturaId).FirstOrDefaultAsync();
+            if (faktura == null)
+                return null;
+            _dbcontext.Remove(faktura);
+            if (await _dbcontext.SaveChangesAsync() > 0)
+                return new ResponeDto { Status = "Succes", Message = "Faktura uspjesno obrisana" };
+            return null;
+
+        }
+
+        public async Task<FakturaDto> CreateArtikal(CreateArtikalDto upArtikal, int fakturaId)
+        {
+            var faktura =await  _dbcontext.Fakture.Include(x=>x.Artikli).Where(x => x.FakturaId == fakturaId).FirstOrDefaultAsync();
+            Artikal artikal = new Artikal(upArtikal,faktura);
+            await _dbcontext.Artikli.AddAsync(artikal);
+            await _dbcontext.SaveChangesAsync();
             return new FakturaDto(faktura);
         }
-        public async Task<ArtikalDto> UpdateArtikal(PutArtikalDto upArtikal,Faktura faktura)
-        {
-            var artikalToUpdate = await _dbcontext.Artikli.Where(x => x.ArtikalId == upArtikal.ArtikalId).FirstAsync();
-            artikalToUpdate.Kolicina = upArtikal.Kolicina;
-            artikalToUpdate.NazivArtikla = upArtikal.NazivArtikla;
-            artikalToUpdate.Cijena = upArtikal.Cijena;
-            artikalToUpdate.PostoRabata = upArtikal.PostoRabata;
-             _dbcontext.Update(artikalToUpdate);
-            return new ArtikalDto(artikalToUpdate);
-        }
-        public async Task CreateArtikal(PutArtikalDto upArtikal, Faktura faktura)
-        {
-            Artikal artikal = new Artikal();
-            artikal.Kolicina = upArtikal.Kolicina;
-            artikal.NazivArtikla = upArtikal.NazivArtikla;
-            artikal.Cijena = upArtikal.Cijena;
-            artikal.PostoRabata = upArtikal.PostoRabata;
-            artikal.Faktura = faktura;
-            await _dbcontext.Artikli.AddAsync(artikal);
-        }
+
         public async Task<ResponeDto> DeleteArtikal(int artikalId)
         {
             var artikal = await _dbcontext.Artikli.Where(x => x.ArtikalId == artikalId).FirstOrDefaultAsync();
@@ -97,6 +89,23 @@ namespace fakture.Controllers.Products.ProductsRepository
             if (await _dbcontext.SaveChangesAsync() > 0)
                 return new ResponeDto { Status = "Succes", Message = "Artikal uspjesno obrisan" };
             return null;
+        }
+
+        public async Task<FakturaDto> PutArtikal(PutArtikalDto upadateArtikal)
+        {
+            var artikal = await _dbcontext.Artikli.Where(x => x.ArtikalId == upadateArtikal.ArtikalId).FirstOrDefaultAsync();
+            artikal.NazivArtikla = upadateArtikal.NazivArtikla;
+            artikal.Kolicina= upadateArtikal.Kolicina;
+            artikal.Cijena = upadateArtikal.Cijena;
+            artikal.PostoRabata = upadateArtikal.PostoRabata;
+            artikal.Faktura = await _dbcontext.Fakture.Include(x => x.Artikli).Where(x => x.FakturaId == artikal.FakturaId).FirstOrDefaultAsync();
+            _dbcontext.Update(artikal.Faktura);
+            _dbcontext.Update(artikal);
+            await _dbcontext.SaveChangesAsync();
+            return new FakturaDto(artikal.Faktura);
+                 
+
+            
         }
     }
 }

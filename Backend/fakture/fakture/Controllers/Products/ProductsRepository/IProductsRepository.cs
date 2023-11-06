@@ -1,4 +1,5 @@
 ﻿using fakture.Controllers.Products.ProductsDtos;
+using fakture.Models.Domain;
 
 namespace fakture.Controllers.Products.ProductsRepository
 {
@@ -9,6 +10,8 @@ namespace fakture.Controllers.Products.ProductsRepository
         public Task<ResponeDto> DeleteArtikal(int artikalId);
         public Task<ResponeDto> DeleteFaktura(int fakturaId);
         public Task<FakturaDto> PostFaktura(CreateFakturaDto newFaktura, string userId);
+        public Task<FakturaDto> CreateArtikal(CreateArtikalDto upArtikal, int fakturaId);
         public Task<FakturaDto> PutFaktura(PutFakturaDto upadateFaktura);
+        public Task<FakturaDto> PutArtikal(PutArtikalDto upadateArtikal);
     }
 }
