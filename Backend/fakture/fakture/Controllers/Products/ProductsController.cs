@@ -81,6 +81,7 @@ namespace fakture.Controllers.Products
             var result = await _repo.PutArtikal(art);
             return Ok(result);
         }
+        [Authorize]
         [Route("GetPaginatedInovice")]
         [HttpGet]
         public async Task<ActionResult<PaginatedDataDto<FakturaDto>>> GetPaginatedList(int currentPage)

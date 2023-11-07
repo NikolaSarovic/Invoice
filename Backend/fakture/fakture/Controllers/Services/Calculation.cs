@@ -18,7 +18,7 @@ namespace fakture.Controllers.Services
             float pdv=(float)0.17;
             float IznosBezPdv = (float)Math.Round(art.Kolicina * art.Cijena,2);
             float Rabat = (float)Math.Round((IznosBezPdv * art.PostoRabata) / 100, 2);
-            float IznosSaRabatomBezPdv = IznosBezPdv - Rabat;
+            float IznosSaRabatomBezPdv = (float)Math.Round( IznosBezPdv - Rabat,2);
             float Pdv= (float)Math.Round((IznosSaRabatomBezPdv)* pdv, 2);
             float Ukupno = (float)Math.Round(IznosSaRabatomBezPdv + Pdv, 2);
 
@@ -42,7 +42,7 @@ namespace fakture.Controllers.Services
             }
 
             float Rabat = (float)Math.Round((IznosBezPdv * fak.PostoRabata) / 100, 2);
-            float IznosSaRabatomBezPdv = IznosBezPdv - Rabat;
+            float IznosSaRabatomBezPdv = (float)Math.Round(IznosBezPdv - Rabat, 2);
             float Pdv = (float)Math.Round((IznosSaRabatomBezPdv) * pdv, 2);
             float Ukupno = (float)Math.Round(IznosSaRabatomBezPdv + Pdv,2);
 
