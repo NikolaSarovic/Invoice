@@ -1,5 +1,4 @@
 ﻿using fakture.Controllers.Products.ProductsDtos;
-using fakture.Models.Domain;
 
 namespace fakture.Controllers.Products.ProductsRepository
 {
@@ -13,5 +12,6 @@ namespace fakture.Controllers.Products.ProductsRepository
         public Task<FakturaDto> CreateArtikal(CreateArtikalDto upArtikal, int fakturaId);
         public Task<FakturaDto> PutFaktura(PutFakturaDto upadateFaktura);
         public Task<FakturaDto> PutArtikal(PutArtikalDto upadateArtikal);
+        public Task<PaginatedDataDto<FakturaDto>> GetPaginatedList(int currentPage);
     }
 }

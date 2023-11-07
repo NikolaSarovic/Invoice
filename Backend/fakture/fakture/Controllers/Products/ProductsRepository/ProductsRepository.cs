@@ -1,8 +1,10 @@
 ﻿using fakture.Controllers.Products.ProductsDtos;
+using fakture.Controllers.Services;
 using fakture.Models;
 using fakture.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 
 namespace fakture.Controllers.Products.ProductsRepository
@@ -107,5 +109,13 @@ namespace fakture.Controllers.Products.ProductsRepository
 
             
         }
+
+        public async Task<PaginatedDataDto<FakturaDto>> GetPaginatedList(int currentPage)
+        {
+          var fakture =  _dbcontext.Fakture.Include(x => x.Artikli).Select(x => new FakturaDto(x)).AsQueryable();
+            return PaginatedList<FakturaDto>.ApplyPagination(fakture, currentPage, 2);
+             
+        }
     }
 }
+
