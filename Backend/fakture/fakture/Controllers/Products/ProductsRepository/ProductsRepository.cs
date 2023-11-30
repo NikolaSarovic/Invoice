@@ -57,7 +57,7 @@ namespace fakture.Controllers.Products.ProductsRepository
             faktura.PostoRabata = upadateFaktura.PostoRabata;
             faktura.Artikli = await _dbcontext.Artikli.Where(x => x.FakturaId == upadateFaktura.FakturaId).ToListAsync();
             _dbcontext.Update(faktura);
-            _dbcontext.SaveChangesAsync();
+           await  _dbcontext.SaveChangesAsync();
             return new FakturaDto(faktura);
 
         }
@@ -99,7 +99,7 @@ namespace fakture.Controllers.Products.ProductsRepository
             artikal.NazivArtikla = upadateArtikal.NazivArtikla;
             artikal.Kolicina= upadateArtikal.Kolicina;
             artikal.Cijena = upadateArtikal.Cijena;
-            artikal.PostoRabata = upadateArtikal.PostoRabata;
+            artikal.PostoRabata = upadateArtikal.PostoRabataArtikla;
             artikal.Faktura = await _dbcontext.Fakture.Include(x => x.Artikli).Where(x => x.FakturaId == artikal.FakturaId).FirstOrDefaultAsync();
             _dbcontext.Update(artikal.Faktura);
             _dbcontext.Update(artikal);
@@ -109,6 +109,13 @@ namespace fakture.Controllers.Products.ProductsRepository
 
             
         }
+        public async Task<ArtikalDto> GetArtikalById(int artikalId)
+        {
+            var artikal = await _dbcontext.Artikli.
+                Where(x => x.ArtikalId == artikalId)
+               .Select(x => new ArtikalDto(x)).FirstOrDefaultAsync();
+            return artikal;
+        }
 
         public async Task<PaginatedDataDto<FakturaDto>> GetPaginatedList(int currentPage)
         {
@@ -116,6 +123,8 @@ namespace fakture.Controllers.Products.ProductsRepository
             return PaginatedList<FakturaDto>.ApplyPagination(fakture, currentPage, 2);
              
         }
+
+       
     }
 }
 

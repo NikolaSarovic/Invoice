@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+    <label>Korisnicko ime</label>
+    <input formControlName="ime"/>
+    <label>Prezime</label>
+    <input formControlName="prezime"/>
+    <label>Mejl</label>
+    <input formControlName="email"/>
+    <label>Broj telefona</label>
+    <input formControlName="brojTelefona"/>
+    <label>Lozinka</label>
+    <input formControlName="lozinka"/>
+    <button (click)="register()">Registracija</button>
+    
+</form>
+
+
+

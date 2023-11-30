@@ -9,7 +9,7 @@ namespace fakture.Controllers.Products.ProductsDtos
         public string NazivArtikla { get; set; }
         public int Kolicina { get; set; }
         public float Cijena { get; set; }
-        public float PostoRabata { get; set; }
+        public float PostoRabataArtikla { get; set; }
         public CalculationDto Calculationdto { get; set; }
 
         public ArtikalDto(Artikal dbArtikal)
@@ -18,7 +18,7 @@ namespace fakture.Controllers.Products.ProductsDtos
             NazivArtikla = dbArtikal.NazivArtikla;
             Kolicina = dbArtikal.Kolicina;
             Cijena = dbArtikal.Cijena;
-            PostoRabata = dbArtikal.PostoRabata;
+            PostoRabataArtikla = dbArtikal.PostoRabata;
 
             Calculationdto = new Calculation().ArtikalCalculation(dbArtikal);
 

@@ -1,0 +1,83 @@
+<div class="header">
+    <h1>Faktura odredjena</h1>
+    <button (click)="Izlaz()">Izlaz</button>
+</div>
+
+<div class="fakturaPodaci">
+    <div >
+    <span>Broj fakture:</span>
+    <span class="vrijednostiFakture">{{data?.brojFakture}}</span>
+    <button class="btnIzmjena" (click)="UpdateFaktura()">Izmjena Fakture</button>
+    </div>
+    <div>
+        <span>Datum:</span>
+        <span class="vrijednostiFakture">{{data?.datum}}</span>
+    </div>
+    <button class="btnKreiranje" (click)="CreateArtikal()">Dodavanje artikla</button>
+    <div>
+        <span>Partner:</span>
+        <span class="vrijednostiFakture">{{data?.partner}}</span>
+      
+    </div>
+    <div>
+        <span>Iznos bez Pdv:</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.iznosBezPdv}} KM</span>
+    </div>
+    <div>
+        <span>Posto rabata:</span>
+        <span class="vrijednostiFakture">{{data?.postoRabata}} %</span>
+    </div>
+    <div>
+        <span>Rabat:</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.rabat}}</span>
+    </div>
+    <div>
+        <span>Iznos sa rabatom bez pdv:</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.iznosRabatBezPdv}} KM</span>
+    </div>
+    <div>
+        <span>PDV:</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.pdv}}</span>
+    </div>
+    <div>
+        <span>Ukupno:</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.ukupno}} KM</span>
+    </div>
+</div>
+<hr>
+<h2>Artikli</h2>
+<table>
+    <thead>
+        <th>Redni broj</th>
+        <th>Naziv</th>
+        <th>Kolicina</th>
+        <th>Cijena</th>
+        <th>Iznos bez pdv</th>
+        <th>Posto rabata</th>
+        <th>Rabat</th>
+        <th>Iznos sa rabatom bez pdv</th>
+        <th>PDV</th>
+        <th>Ukupno</th>
+        <th>Izmjena odredjenog artikla</th>
+        <th>Brisanje odredjenog artikla</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let art of data.artikli">
+            <td>{{art?.artikalId}}</td>
+            <td>{{art?.nazivArtikla}}</td>
+            <td>{{art?.kolicina}}</td>
+            <td>{{art?.cijena}} KM</td>
+            <td>{{art?.calculationdto?.iznosBezPdv}} KM</td>
+            <td>{{art?.postoRabataArtikla}} %</td>
+            <td>{{art?.calculationdto?.rabat}}</td>
+            <td>{{art?.calculationdto?.iznosRabatBezPdv}} KM</td>
+            <td>{{art?.calculationdto?.pdv}}</td>
+            <td>{{art?.calculationdto?.ukupno}} KM</td>
+            <td><button (click)="UpdateArtikal(art.artikalId)">Izmjena</button></td>
+            <td><button (click)="BrisanjeArtikla(art.artikalId)">Brisanje</button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+

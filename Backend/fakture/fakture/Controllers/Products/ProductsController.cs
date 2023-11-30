@@ -33,6 +33,13 @@ namespace fakture.Controllers.Products
             return Ok(await _repo.GetFakturaById(fakturaId));
         }
         [Authorize]
+        [HttpGet("Products/GetItemId")]
+        public async Task<ActionResult<ArtikalDto>> GetArtikalById(int aritkalId)
+        {
+            return Ok(await _repo.GetArtikalById(aritkalId));
+            
+        }
+        [Authorize]
         [HttpDelete("Products/DeleteItem")]
         public async Task<ActionResult<ResponeDto>> DeleteArtikal(int artikalId)
         {

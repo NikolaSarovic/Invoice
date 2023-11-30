@@ -50,7 +50,7 @@ namespace fakture.Controllers.User.UserRepository
                 var token = new JwtSecurityToken(
                     issuer: _configuration["JWT:ValidAudience"],
                     audience: _configuration["JWT:ValidIssuer"],
-                    expires: DateTime.Now.AddMinutes(20),
+                    expires: DateTime.Now.AddMinutes(120),
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                     );

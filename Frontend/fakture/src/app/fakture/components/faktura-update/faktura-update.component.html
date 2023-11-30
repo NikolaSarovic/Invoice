@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Izmjena fakture</h1>
+<div mat-dialog-content class="matContent">
+    Izmjena podataka o fakturi
+  </div>
+<form [formGroup]="form" > 
+    <div>
+        <mat-form-field>
+            <mat-label>Broj fakture</mat-label>
+            <input matInput formControlName="brojFakture">
+            <mat-error *ngIf="form.controls['brojFakture'].errors?.['required']">Prazno polje</mat-error>
+            <mat-error *ngIf="form.controls['brojFakture'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+        </mat-form-field>
+       </div>
+        
+       <div>
+        <mat-form-field>
+            <mat-label>Datum</mat-label>
+            <input matInput formControlName="datum">
+            <mat-error>Prazno polje ili pogresno unesen datum</mat-error>
+        </mat-form-field>
+       </div>
+        
+       <div>
+        <mat-form-field>
+            <mat-label>Partner</mat-label>
+            <input matInput formControlName="partner">
+            <mat-error>Prazno polje.</mat-error>
+        </mat-form-field>
+       </div>
+       
+         <div>
+            <mat-form-field>
+                <mat-label>Posto rabata fakture</mat-label>
+                <input matInput formControlName="postoRabata">
+                <mat-error *ngIf="form.controls['postoRabata'].errors?.['required']">Prazno polje</mat-error>
+                <mat-error *ngIf="form.controls['postoRabata'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+            </mat-form-field>
+         </div>         
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>No</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid"
+    type="submit" (click)="Update()">Update</button>   
+  </div>
+

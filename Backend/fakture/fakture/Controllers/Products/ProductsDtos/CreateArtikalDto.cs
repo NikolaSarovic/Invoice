@@ -5,6 +5,6 @@
         public string NazivArtikla { get; set; }
         public int Kolicina { get; set; }
         public float Cijena { get; set; }
-        public float PostoRabata { get; set; }
+        public float PostoRabataArtikla { get; set; }
     }
 }

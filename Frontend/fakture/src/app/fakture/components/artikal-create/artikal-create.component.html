@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Novi artiakl</h1>
+<div mat-dialog-content class="matContent">
+    Dodavanje podataka o novom artiklu
+  </div>
+<form [formGroup]="form" > 
+       <div>
+        <mat-form-field>
+          <mat-label>Naziv arktila</mat-label>
+            <input matInput formControlName="nazivArtikla">
+            <mat-error *ngIf="form.controls['nazivArtikla'].errors?.['required']">Prazno polje</mat-error>
+        </mat-form-field>
+       </div>      
+       <div>
+        <mat-form-field>
+          <mat-label>Kolicina</mat-label>
+            <input matInput formControlName="kolicina">
+            <mat-error *ngIf="form.controls['kolicina'].errors?.['required']">Prazno polje</mat-error>
+            <mat-error *ngIf="form.controls['kolicina'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+        </mat-form-field>
+       </div>     
+       <div>
+        <mat-form-field>
+          <mat-label>Cijena</mat-label>
+            <input matInput formControlName="cijena">
+            <mat-error *ngIf="form.controls['cijena'].errors?.['required']">Prazno polje</mat-error>
+            <mat-error *ngIf="form.controls['cijena'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+        </mat-form-field>
+       </div>     
+         <div>
+            <mat-form-field>
+              <mat-label>Posto rabata artikla</mat-label>
+                <input matInput formControlName="postoRabataArtikla">
+                <mat-error *ngIf="form.controls['postoRabataArtikla'].errors?.['required']">Prazno polje</mat-error>
+                <mat-error *ngIf="form.controls['postoRabataArtikla'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+            </mat-form-field>
+        </div>          
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>No</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid"
+    type="submit" (click)="CreateArtikal()">Add</button>   
+  </div>

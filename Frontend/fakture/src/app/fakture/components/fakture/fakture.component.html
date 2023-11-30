@@ -1,0 +1,23 @@
+<div>
+    <button (click)="Logout()">Odjavljivanje korisinka</button>  
+    <h1>Pregled faktura</h1>
+    <button (click)="openDialog()">Kreiraj novu fakturu</button>   
+</div>
+<table>
+    <thead>
+        <th>Broj fakture</th>
+        <th>Datum</th>
+        <th>Partner</th>
+        <th>Posto rabata</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let faktura of fakture">
+            <td>{{faktura?.brojFakture}}</td>
+            <td>{{faktura?.datum}}</td>
+            <td>{{faktura?.partner}}</td>
+            <td>{{faktura?.postoRabata}}</td>
+            <td><button (click)="PregledFakture(faktura?.fakturaId)">Pregled</button></td> 
+            <td><button (click)="deleteFaktura(faktura?.fakturaId)">Obrisi</button></td>
+            </tr>
+    </tbody>
+</table>

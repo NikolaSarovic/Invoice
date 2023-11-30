@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+    <label>Email</label>
+    <input formControlName="email"/>
+    <label>Lozinka</label>
+    <input formControlName="password"/>
+    <button (click)="login()">Login</button>
+    <button (click)="registracija()">Registration</button>
+</form>

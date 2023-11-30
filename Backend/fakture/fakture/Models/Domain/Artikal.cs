@@ -26,7 +26,7 @@ namespace fakture.Models.Domain
             this.Kolicina = newArtikal.Kolicina;
             this.Cijena = newArtikal.Cijena;
             this.NazivArtikla = newArtikal.NazivArtikla;
-            this.PostoRabata = newArtikal.PostoRabata;
+            this.PostoRabata = newArtikal.PostoRabataArtikla;
             this.Faktura = faktura;
 
         }

@@ -1,0 +1,38 @@
+.header>h1 {
+    display: inline;
+    text-align: center;
+    position: relative;
+    left: 40%;
+}
+.header>button {
+    position: absolute;
+    right: 10px;
+}
+.btnIzmjena{
+    position: absolute;
+    right: 10px;
+    margin-bottom: 10px;
+}
+.btnKreiranje {
+    position: absolute;
+    right: 10px;
+    margin-bottom: 10px;
+}
+.fakturaPodaci {
+    font-size: 20px;
+}
+.fakturaPodaci>div {
+    margin-bottom: 8px;
+}
+.vrijednostiFakture {
+    font-weight: bold;
+    
+}
+
+ 
+  table, th, td {
+  border: 1px solid;
+}
+table {
+    width: 100%;
+  }
