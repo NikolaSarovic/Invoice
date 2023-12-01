@@ -1,17 +1,50 @@
-<form [formGroup]="form">
-    <label>Korisnicko ime</label>
-    <input formControlName="ime"/>
-    <label>Prezime</label>
-    <input formControlName="prezime"/>
-    <label>Mejl</label>
-    <input formControlName="email"/>
-    <label>Broj telefona</label>
-    <input formControlName="brojTelefona"/>
-    <label>Lozinka</label>
-    <input formControlName="lozinka"/>
-    <button (click)="register()">Registracija</button>
-    
-</form>
-
-
-
+<div class="loginForm">
+    <h1 mat-dialog-title>Registration</h1>
+    <div mat-dialog-content class="matContent">
+        Registracija novog korisinka 
+      </div>
+    <form [formGroup]="form" > 
+           <div>
+            <div>
+                <mat-form-field>
+                  <mat-label>Ime</mat-label>
+                    <input matInput formControlName="ime">
+                    <mat-error *ngIf="form.controls['ime'].errors?.['required']">Prazno polje</mat-error>
+                </mat-form-field>
+               </div>      
+               <div>
+                <mat-form-field>
+                  <mat-label>Prezime</mat-label>
+                    <input matInput type="prezime" formControlName="prezime">
+                    <mat-error *ngIf="form.controls['prezime'].errors?.['required']">Prazno polje</mat-error>
+                </mat-form-field>
+               </div> 
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+                <mat-error *ngIf="form.controls['email'].errors?.['required']">Prazno polje</mat-error>
+                <mat-error *ngIf="form.controls['email'].errors?.['email']">Pogresan unos mejla</mat-error>
+            </mat-form-field>
+           </div>
+           <div>
+            <mat-form-field>
+              <mat-label>Broj telefona</mat-label>
+                <input matInput  formControlName="brojTelefona">
+                <mat-error *ngIf="form.controls['brojTelefona'].errors?.['required']">Prazno polje</mat-error>
+            </mat-form-field>
+           </div>      
+           <div>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="lozinka">
+                <mat-error *ngIf="form.controls['lozinka'].errors?.['required']">Prazno polje</mat-error>
+            </mat-form-field>
+           </div>  
+                      
+      </form>
+      <div mat-dialog-actions>
+        <button mat-raised-button  color="primary" (click)="login()" style="margin-right: 4px;">Login</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" class="btnSubmit"
+        type="submit" (click)="register()">Registration</button>   
+      </div>
+    </div>

@@ -16,15 +16,18 @@ import { FakturaOdredjenaComponent } from './fakture/components/faktura-odredjen
 import { ArtikalUpdateComponent } from './fakture/components/artikal-update/artikal-update.component';
 import { ArtikalCreateComponent } from './fakture/components/artikal-create/artikal-create.component';
 import { FakturaUpdateComponent } from './fakture/components/faktura-update/faktura-update.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     FaktureComponent,
     FakturaOdredjenaComponent,
+    HeaderComponent,
+    FooterComponent,
     
     
     
@@ -41,10 +44,14 @@ import { FakturaUpdateComponent } from './fakture/components/faktura-update/fakt
     ArtikalUpdateComponent,
     ArtikalCreateComponent,
     FakturaUpdateComponent,
+    LoginComponent,
+    RegisterComponent,
+    BrowserAnimationsModule
     
     
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
+ 
 })
 export class AppModule { }

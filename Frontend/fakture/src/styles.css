@@ -1,1 +1,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html {
+    background-color: rgba(221, 217, 217, 0.644);
+    height: 100%;
+    margin:0px;
+}
+html>body {
+    margin:0px;
+}

@@ -8,7 +8,7 @@
             <mat-label>Broj fakture</mat-label>
             <input matInput formControlName="brojFakture">
             <mat-error *ngIf="form.controls['brojFakture'].errors?.['required']">Prazno polje</mat-error>
-            <mat-error *ngIf="form.controls['brojFakture'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+            <mat-error *ngIf="form.controls['brojFakture'].errors?.['maxlength']">Previse karaktera uneseno</mat-error>
         </mat-form-field>
        </div>
         
@@ -71,8 +71,8 @@
         </mat-form-field>
         </div>
   </form>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>No</button>
+  <div mat-dialog-actions class="btnDialog">
+    <button mat-button mat-dialog-close color="primary">No</button>
     <button mat-raised-button color="primary"
     type="submit"  (click)="onSubmit()">Submit</button>   
   </div>

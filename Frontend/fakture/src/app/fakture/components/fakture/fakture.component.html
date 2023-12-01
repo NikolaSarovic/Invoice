@@ -1,7 +1,10 @@
+<div class="fak">
+<div class="naslov">
+    <h1>Pregled faktura:</h1>
+    <button (click)="Logout()" class="btnOdjava">Odjavljivanje</button>   
+</div>
 <div>
-    <button (click)="Logout()">Odjavljivanje korisinka</button>  
-    <h1>Pregled faktura</h1>
-    <button (click)="openDialog()">Kreiraj novu fakturu</button>   
+<button (click)="openDialog()" class="btnCreate">Kreiranje nove fakture</button> 
 </div>
 <table>
     <thead>
@@ -9,15 +12,18 @@
         <th>Datum</th>
         <th>Partner</th>
         <th>Posto rabata</th>
+        <th>Pregled</th>
+        <th>Brisanje</th>
     </thead>
     <tbody>
         <tr *ngFor="let faktura of fakture">
-            <td>{{faktura?.brojFakture}}</td>
+            <td >{{faktura?.brojFakture}}</td>
             <td>{{faktura?.datum}}</td>
             <td>{{faktura?.partner}}</td>
             <td>{{faktura?.postoRabata}}</td>
-            <td><button (click)="PregledFakture(faktura?.fakturaId)">Pregled</button></td> 
-            <td><button (click)="deleteFaktura(faktura?.fakturaId)">Obrisi</button></td>
+            <td><button (click)="PregledFakture(faktura?.fakturaId)" class="btnPregled">Pregled</button></td> 
+            <td><button (click)="deleteFaktura(faktura?.fakturaId)" class="btnBrisanje">Brisanje</button></td>
             </tr>
     </tbody>
 </table>
+</div>

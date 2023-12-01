@@ -1,8 +1,28 @@
-<form [formGroup]="form">
-    <label>Email</label>
-    <input formControlName="email"/>
-    <label>Lozinka</label>
-    <input formControlName="password"/>
-    <button (click)="login()">Login</button>
-    <button (click)="registracija()">Registration</button>
-</form>
+<div class="loginForm">
+<h1 mat-dialog-title>Login</h1>
+<div mat-dialog-content class="matContent">
+    Korisnicki pristup fakturama 
+  </div>
+<form [formGroup]="form" > 
+       <div>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="form.controls['email'].errors?.['required']">Prazno polje</mat-error>
+            <mat-error *ngIf="form.controls['email'].errors?.['email']">Pogresan unos mejla</mat-error>
+        </mat-form-field>
+       </div>      
+       <div>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="form.controls['password'].errors?.['required']">Prazno polje</mat-error>
+        </mat-form-field>
+       </div>              
+  </form>
+  <div mat-dialog-actions class="btnDiv">
+    <button mat-raised-button  color="primary" (click)="registracija()" style="margin-right: 4px;">Registration</button>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" 
+    type="submit" (click)="login()">Login</button>   
+  </div>
+</div>

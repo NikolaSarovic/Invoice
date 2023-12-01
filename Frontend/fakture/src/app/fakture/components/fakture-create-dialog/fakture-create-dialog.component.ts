@@ -35,7 +35,7 @@ export class FaktureCreateDialogComponent {
   fakturaData:fakutureData|undefined
 
   form=this.fb.group({
-    brojFakture:this.fb.control('',[Validators.required,Validators.maxLength(50)]) ,
+    brojFakture:this.fb.control('',[Validators.required,Validators.maxLength(20)]) ,
     datum:this.fb.control('',[Validators.required,Validators.maxLength(10)]),
     partner:this.fb.control('',[Validators.required,Validators.maxLength(50)]),
     postoRabata:this.fb.control('',[Validators.required,Validators.maxLength(10)]),

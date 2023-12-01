@@ -1,6 +1,7 @@
+<div class="fakOd">
 <div class="header">
-    <h1>Faktura odredjena</h1>
-    <button (click)="Izlaz()">Izlaz</button>
+    <h1>Pregled odredjene fakture</h1>
+    <button (click)="Izlaz()" class="btnIzlaz">Izlaz</button>
 </div>
 
 <div class="fakturaPodaci">
@@ -45,7 +46,7 @@
     </div>
 </div>
 <hr>
-<h2>Artikli</h2>
+<h2>Artikli:</h2>
 <table>
     <thead>
         <th>Redni broj</th>
@@ -73,11 +74,12 @@
             <td>{{art?.calculationdto?.iznosRabatBezPdv}} KM</td>
             <td>{{art?.calculationdto?.pdv}}</td>
             <td>{{art?.calculationdto?.ukupno}} KM</td>
-            <td><button (click)="UpdateArtikal(art.artikalId)">Izmjena</button></td>
-            <td><button (click)="BrisanjeArtikla(art.artikalId)">Brisanje</button></td>
+            <td><button (click)="UpdateArtikal(art.artikalId)" class="btnPregled">Izmjena</button></td>
+            <td><button (click)="BrisanjeArtikla(art.artikalId)" class="btnBrisanje">Brisanje</button></td>
         </tr>
     </tbody>
 </table>
+</div>
 
 
 

@@ -1,9 +1,11 @@
-.mat-dialog-content {
-    width: auto;
-    height: 330px;
-    position: relative;
-    left: 60px;
+form {
+    text-align: left;
+    margin-left: 65px;
 }
+.btnDialog {
+    margin-left: 65px;
+}
+
 h1 {
     margin-bottom: 5px;;
 }

@@ -1,0 +1,26 @@
+.loginForm {
+    background-color: rgb(184, 184, 184);;
+    border-radius: 12px;
+    position: absolute;
+    text-align: center;
+    width: 350px;
+    height: 345px;
+    top: 30%;
+    left: 40%;
+    display: inline;
+}
+.matContent
+{
+    margin-bottom:15px;
+    
+}
+h1 {
+    letter-spacing: 10px;
+    color: dimgrey;
+    font-size: 34px;
+    font-family: system-ui;
+}
+
+.btnDiv {
+    display: block;
+}
