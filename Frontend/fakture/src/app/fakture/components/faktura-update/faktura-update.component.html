@@ -1,4 +1,13 @@
-<h1 mat-dialog-title>Izmjena fakture</h1>
+<div *ngIf="responseAlert.success" class="alertObavjest" id="alert">
+    <img src="../../../../assets/images/success.png" alt="success">
+    <span>{{responseAlert.message}}</span>
+</div>
+<div *ngIf="responseAlert.error" class="alertObavjest" id="alert" style="background-color: red;">
+    <img src="../../../../assets/images/error.png" alt="error">
+    <span>{{responseAlert.message}}</span>
+</div>
+
+    <h1 mat-dialog-title>Izmjena fakture</h1>
 <div mat-dialog-content class="matContent">
     Izmjena podataka o fakturi
   </div>

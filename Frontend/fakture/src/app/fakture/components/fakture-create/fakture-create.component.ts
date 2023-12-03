@@ -7,15 +7,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FaktureService } from 'app/fakture/services/fakture.service';
-import { fakutureData} from 'app/fakture/models/DataModels';
+import { ResponseAlert, fakutureData} from 'app/fakture/models/DataModels';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar'
 
-
 @Component({
-  selector: 'app-fakture-create-dialog',
-  templateUrl: './fakture-create-dialog.component.html',
-  styleUrls: ['./fakture-create-dialog.component.css'],
+  selector: 'app-fakture-create',
+  templateUrl: './fakture-create.component.html',
+  styleUrls: ['./fakture-create.component.css'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -27,22 +26,27 @@ import {MatSnackBar} from '@angular/material/snack-bar'
     ReactiveFormsModule
   ]
 })
-export class FaktureCreateDialogComponent {
+export class FaktureCreateComponent {
   constructor(private fb:FormBuilder,private service:FaktureService,private router:Router,private _snackBar: MatSnackBar){
 
   }
 
   fakturaData:fakutureData|undefined
+  responseAlert:ResponseAlert={
+    error:false,
+    success:false,
+    message:""
+    }
 
   form=this.fb.group({
     brojFakture:this.fb.control('',[Validators.required,Validators.maxLength(20)]) ,
     datum:this.fb.control('',[Validators.required,Validators.maxLength(10)]),
     partner:this.fb.control('',[Validators.required,Validators.maxLength(50)]),
-    postoRabata:this.fb.control('',[Validators.required,Validators.maxLength(10)]),
+    postoRabata:this.fb.control('',[Validators.required,Validators.maxLength(10),Validators.pattern("^(\\d*\\.)?\\d+$")]),
     nazivArtikla:this.fb.control('',Validators.required),
-    kolicina:this.fb.control('',[Validators.required,Validators.maxLength(20)]),
-    cijena:this.fb.control('',[Validators.required,Validators.maxLength(10)]),
-    postoRabataArtikla:this.fb.control('',[Validators.required,Validators.maxLength(10)])
+    kolicina:this.fb.control('',[Validators.required,Validators.maxLength(20),Validators.pattern("[0-9]+")]),
+    cijena:this.fb.control('',[Validators.required,Validators.maxLength(10),Validators.pattern("^(\\d*\\.)?\\d+$")]),
+    postoRabataArtikla:this.fb.control('',[Validators.required,Validators.maxLength(10),Validators.pattern("^(\\d*\\.)?\\d+$")])
   })
  
   onSubmit() {
@@ -58,25 +62,37 @@ export class FaktureCreateDialogComponent {
     postoRabataArtikla:(this.form.value.postoRabataArtikla as string) as unknown as number}]}
 
     //console.log(this.fakturaData)
-   this.service.createFaktura(this.fakturaData).subscribe((response:any)=>{
-    if(response?.success==true){
-      console.log(response?.message)
-      
-    }
-    if(response?.success==false)
-      {
-        console.log(response?.message)
-        
-      }
-   })
-   setTimeout(()=>{window.location.reload()},500)
+   this.service.createFaktura(this.fakturaData).subscribe(
+    (response:any)=>{
+    this.responseAlert.message="Uspjesno dodato";
+    this.responseAlert.success=true;
+    console.log(this.responseAlert.message)
+    setTimeout(()=>{
+      const box=document.getElementById('alert');
+      console.log(box)
+      if (box != null) {
+        this.responseAlert.success=false;
+        box.style.display = 'inline-block';
+         }
+       },1500)
+       setTimeout(()=>{window.location.reload()},500)
+    },
+    (error:any)=> {
+      console.log("sou program")
+     this.responseAlert.message="Neuspjesno dodato";
+     this.responseAlert.error=true;
+     setTimeout(()=>{
+       const box=document.getElementById('alert');
+       console.log(box)
+       if (box != null) {
+         this.responseAlert.error=false;
+         box.style.display = 'inline-block';
+          }
+        },1500)
+     })
+  // setTimeout(()=>{window.location.reload()},500)
   
    
   }
-/* openSnackBar(message: string, type: string) { 
-    this._snackBar.open(message, type) 
-  }*/
-
-
 
 }

@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { artikliData, artikliDataUpdate } from 'app/fakture/models/DataModels';
+import { artikliData, artikliDataUpdate,ResponseAlert } from 'app/fakture/models/DataModels';
 import { FaktureService } from 'app/fakture/services/fakture.service';
 
 @Component({
@@ -37,6 +37,12 @@ export class ArtikalUpdateComponent {
   cijena:this.fb.control(0,[Validators.required,Validators.maxLength(10)]),
   postoRabataArtikla:this.fb.control(0,[Validators.required,Validators.maxLength(10)]), 
 })
+
+responseAlert:ResponseAlert={
+  error:false,
+  success:false,
+  message:""
+  }
   
 ngOnInit() {
     this.service.getArtikalId(this.artId).subscribe((response:any)=>{
@@ -60,16 +66,33 @@ this.artikalDataUpdate={
   }
   console.log(this.artikalDataUpdate)
   this.service.updateArtikalId(this.artikalDataUpdate).subscribe((response:any)=>{
-    if(response?.success==true){
-      
-    }
-    if(response?.success==false)
-      {
-        console.log(response?.message)
-        
-      }
-  })
-  setTimeout(()=>{window.location.reload()},500)
+    this.responseAlert.message="Uspjesno izmijenjeno";
+          this.responseAlert.success=true;
+          console.log(this.responseAlert.message)
+          setTimeout(()=>{
+            const box=document.getElementById('alert');
+            console.log(box)
+            if (box != null) {
+              this.responseAlert.success=false;
+              box.style.display = 'inline-block';
+               }
+             },1500)
+             setTimeout(()=>{window.location.reload()},500)
+   },
+  (error:any)=> {
+    console.log("sou program")
+   this.responseAlert.message="Neuspjesno izmijenjeno";
+   this.responseAlert.error=true;
+   setTimeout(()=>{
+     const box=document.getElementById('alert');
+     console.log(box)
+     if (box != null) {
+       this.responseAlert.error=false;
+       box.style.display = 'inline-block';
+        }
+      },1500)
+   }
+  )
 
 }
 

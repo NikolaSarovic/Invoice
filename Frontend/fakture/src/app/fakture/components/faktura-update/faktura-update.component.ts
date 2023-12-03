@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { fakutureData, fakutureDataUpdate } from 'app/fakture/models/DataModels';
+import { ResponseAlert, fakutureData, fakutureDataUpdate } from 'app/fakture/models/DataModels';
 import { FaktureService } from 'app/fakture/services/fakture.service';
 
 @Component({
@@ -24,6 +24,12 @@ import { FaktureService } from 'app/fakture/services/fakture.service';
   ]
 })
 export class FakturaUpdateComponent {
+  responseAlert:ResponseAlert={
+    error:false,
+    success:false,
+    message:""
+    }
+  
 
   constructor(private fb:FormBuilder,private service:FaktureService) {
   }
@@ -62,19 +68,40 @@ export class FakturaUpdateComponent {
     partner:this.form.value.partner as unknown as string,
     postoRabata:this.form.value.postoRabata as unknown as number,
     }
-    console.log(this.faktDataUpdate);
-    this.service.updateFaktura(this.faktDataUpdate).subscribe((response:any)=>{
-      if(response?.success==true){
+   
+    this.service.updateFaktura(this.faktDataUpdate).subscribe(
+      (response:any)=>{
       
+          this.responseAlert.message="Uspjesno izmijenjeno";
+          this.responseAlert.success=true;
+          console.log(this.responseAlert.message)
+          setTimeout(()=>{
+            const box=document.getElementById('alert');
+            console.log(box)
+            if (box != null) {
+              this.responseAlert.success=false;
+              box.style.display = 'inline-block';
+               }
+             },1500)
+             setTimeout(()=>{window.location.reload()},500)
+       },
+    
+      (error:any)=> {
+         console.log("sou program")
+        this.responseAlert.message="Neuspjesno izmijenjeno";
+        this.responseAlert.error=true;
+        setTimeout(()=>{
+          const box=document.getElementById('alert');
+          console.log(box)
+          if (box != null) {
+            this.responseAlert.error=false;
+            box.style.display = 'inline-block';
+             }
+           },1500)
       }
-      if(response?.success==false)
-        {
-          console.log(response?.message)
-          
-        }
 
-    })
-    setTimeout(()=>{window.location.reload()},500)
+    )
+   
     
   }
 }

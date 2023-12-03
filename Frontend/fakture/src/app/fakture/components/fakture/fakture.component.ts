@@ -4,9 +4,10 @@ import { FaktureService } from '../../services/fakture.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'app/auth/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FaktureCreateDialogComponent } from '../fakture-create-dialog/fakture-create-dialog.component';
 import { Router } from '@angular/router';
 import { FakturaOdredjenaComponent } from '../faktura-odredjena/faktura-odredjena.component';
+import { FakturaDeleteComponent } from '../faktura-delete/faktura-delete.component';
+import { FaktureCreateComponent } from '../fakture-create/fakture-create.component';
 
 
 
@@ -28,8 +29,8 @@ export class FaktureComponent {
      
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(FaktureCreateDialogComponent);
+  createFaktura(): void {
+    const dialogRef = this.dialog.open(FaktureCreateComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -38,8 +39,10 @@ export class FaktureComponent {
 
   
   deleteFaktura(id:number){
-    this.service.deleteFaktura(id).subscribe((response:any) => {})
-    window.location.reload()
+    localStorage.setItem("fakturaId",id.toString())
+    console.log(id);
+    const dialogRef=this.dialog.open(FakturaDeleteComponent)
+    
   }
   Logout():void {
     localStorage.setItem("token","")

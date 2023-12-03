@@ -1,3 +1,4 @@
+<div *ngIf="error" id="alert">{{message}}</div>
 <div class="loginForm">
 <h1 mat-dialog-title>Login</h1>
 <div mat-dialog-content class="matContent">
@@ -18,11 +19,12 @@
             <input matInput type="password" formControlName="password">
             <mat-error *ngIf="form.controls['password'].errors?.['required']">Prazno polje</mat-error>
         </mat-form-field>
-       </div>              
+       </div>    
+       <div mat-dialog-actions class="btnDiv">
+        <button mat-raised-button  color="primary" (click)="registracija()" style="margin-right: 4px;">Registration</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" 
+        type="submit" (click)="login()">Login</button>   
+      </div>          
   </form>
-  <div mat-dialog-actions class="btnDiv">
-    <button mat-raised-button  color="primary" (click)="registracija()" style="margin-right: 4px;">Registration</button>
-    <button mat-raised-button color="primary" [disabled]="form.invalid" 
-    type="submit" (click)="login()">Login</button>   
-  </div>
+ 
 </div>

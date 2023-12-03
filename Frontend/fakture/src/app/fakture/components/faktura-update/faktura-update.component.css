@@ -9,3 +9,23 @@ form {
 h1 {
     margin-bottom: 5px;;
 }
+.alertObavjest{
+    display: none;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    border: 3px solid white;
+    border-radius: 66px;
+    background-color:rgb(41, 197, 41);
+    color:white;
+
+}
+.alertObavjest>img {
+    position: relative;
+    top: 3px;
+   /* left: -19px;*/
+}
+.alertObavjest>span {
+    position: relative;
+    bottom: 5px;
+}

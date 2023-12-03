@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FaktureComponent } from './fakture/components/fakture/fakture.component';
 import { AuthService } from './auth/services/auth.service';
 import {MatDialogModule} from '@angular/material/dialog';
-import { FaktureCreateDialogComponent } from './fakture/components/fakture-create-dialog/fakture-create-dialog.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FakturaOdredjenaComponent } from './fakture/components/faktura-odredjena/faktura-odredjena.component';
 import { ArtikalUpdateComponent } from './fakture/components/artikal-update/artikal-update.component';
@@ -19,6 +18,10 @@ import { FakturaUpdateComponent } from './fakture/components/faktura-update/fakt
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ArtikalDeleteComponent } from './fakture/components/artikal-delete/artikal-delete.component';
+import { FakturaDeleteComponent } from './fakture/components/faktura-delete/faktura-delete.component';
+import { FaktureCreateComponent } from './fakture/components/fakture-create/fakture-create.component';
+
 
 
 @NgModule({
@@ -28,6 +31,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FakturaOdredjenaComponent,
     HeaderComponent,
     FooterComponent,
+    ArtikalDeleteComponent,
+    FakturaDeleteComponent,
+    
+    
     
     
     
@@ -39,14 +46,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
-    FaktureCreateDialogComponent,
+    FaktureCreateComponent,
     MatSnackBarModule,
     ArtikalUpdateComponent,
     ArtikalCreateComponent,
     FakturaUpdateComponent,
     LoginComponent,
     RegisterComponent,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
     
     
   ],

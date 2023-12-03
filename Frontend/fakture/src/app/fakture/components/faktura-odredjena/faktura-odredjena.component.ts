@@ -5,6 +5,9 @@ import { FaktureService } from 'app/fakture/services/fakture.service';
 import { ArtikalUpdateComponent } from '../artikal-update/artikal-update.component';
 import { ArtikalCreateComponent } from '../artikal-create/artikal-create.component';
 import { FakturaUpdateComponent } from '../faktura-update/faktura-update.component';
+import { ResponseAlert } from 'app/fakture/models/DataModels';
+import { ArtikalDeleteComponent } from '../artikal-delete/artikal-delete.component';
+
 
 @Component({
   selector: 'app-faktura-odredjena',
@@ -13,7 +16,7 @@ import { FakturaUpdateComponent } from '../faktura-update/faktura-update.compone
 })
 export class FakturaOdredjenaComponent {
   IdFakture:number |undefined
-  data:any=[]
+  data:any=[];
   
   constructor(private service:FaktureService,private router:Router,private dialog:MatDialog) {
 
@@ -30,8 +33,8 @@ export class FakturaOdredjenaComponent {
     this.router.navigate(['fakture']);
   }
   BrisanjeArtikla(id:number) {
-    this.service.deleteArtikalId(id).subscribe((response)=>{})
-    window.location.reload()
+   localStorage.setItem("artikalId",id.toString())
+   const dialogRef=this.dialog.open(ArtikalDeleteComponent);
     console.log(id)
   }
   UpdateArtikal(id:number) {

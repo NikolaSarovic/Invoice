@@ -31,5 +31,11 @@ export interface fakutureDataUpdate {
     
 }
 
+export interface ResponseAlert {
+    success:boolean,
+    error:boolean,
+    message:string
+}
+
 
 

@@ -29,6 +29,8 @@ export class LoginComponent {
     email:this.fb.control('',[Validators.required,Validators.email]),
     password:this.fb.control('',Validators.required)
   });
+  error:boolean=false
+  message:string=""
 
 
   constructor(private fb:FormBuilder,private service:AuthService,private router:Router){
@@ -42,6 +44,18 @@ export class LoginComponent {
       if(response?.token){
         localStorage.setItem("token",response?.token)
         this.router.navigate(['fakture']);
+      }
+      else{
+        this.error=true;
+          this.message=response?.message
+          setTimeout(()=>{
+            const box=document.getElementById('alert');
+            console.log(box)
+            if (box != null) {
+              this.error=false;
+              box.style.display = 'none';
+            }
+       },1500)
       }
     })
   }

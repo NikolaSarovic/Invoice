@@ -31,23 +31,45 @@ export class RegisterComponent {
     brojTelefona:this.fb.control('',Validators.required),
     lozinka:this.fb.control('',Validators.required)
   })
-  poruka:string=""
+  error:boolean=false
+  message:string=""
+  success:boolean=false
+  
   constructor(private fb:FormBuilder,private service:AuthService,private router:Router){
 
   }
 
   register(){
-    const registerForm=this.form.value;
+    const registerForm=this.form.value; 
     this.service.register(registerForm).subscribe((response:any)=>{
       if(response?.success==true)
       {
-        console.log(response?.message)
-         this.router.navigate(['login']);
+        this.success=true;
+         this.message="uspesno";
+      setTimeout(()=>{
+      const box=document.getElementById('alertRegister');
+      console.log(box)
+      if (box != null) {
+        this.success=false;
+        box.style.display = 'inline-block';
+         }
+       },1500)
+       setTimeout(()=>{ this.router.navigate(['login']);},2500)
+ 
       }
       if(response?.success==false)
       {
-        
-      localStorage.setItem("message",response?.message)
+        this.error=true;
+          this.message=response?.message
+          console.log(this.error)
+          setTimeout(()=>{
+            const box=document.getElementById('alertRegister');
+            console.log(box)
+            if (box != null) {
+              this.error=false;
+              box.style.display = 'none';
+            }
+       },2500)
         console.log(response?.message)
         
       }

@@ -24,3 +24,16 @@ h1 {
 .btnDiv {
     display: block;
 }
+#alert {
+    border-radius: 40px;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    margin-top: 37px;
+    display: inline-block;
+    position: relative;
+    top: 120px;
+    left: 40%;
+    border: 2px solid white;
+}

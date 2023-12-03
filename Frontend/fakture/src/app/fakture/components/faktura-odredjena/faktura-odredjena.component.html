@@ -22,7 +22,7 @@
     </div>
     <div>
         <span>Iznos bez Pdv:</span>
-        <span class="vrijednostiFakture">{{data?.calculationdto?.iznosBezPdv}} KM</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.iznosBezPdv}}</span>
     </div>
     <div>
         <span>Posto rabata:</span>
@@ -34,7 +34,7 @@
     </div>
     <div>
         <span>Iznos sa rabatom bez pdv:</span>
-        <span class="vrijednostiFakture">{{data?.calculationdto?.iznosRabatBezPdv}} KM</span>
+        <span class="vrijednostiFakture">{{data?.calculationdto?.iznosRabatBezPdv}}</span>
     </div>
     <div>
         <span>PDV:</span>
@@ -67,11 +67,11 @@
             <td>{{art?.artikalId}}</td>
             <td>{{art?.nazivArtikla}}</td>
             <td>{{art?.kolicina}}</td>
-            <td>{{art?.cijena}} KM</td>
-            <td>{{art?.calculationdto?.iznosBezPdv}} KM</td>
+            <td>{{art?.cijena}}</td>
+            <td>{{art?.calculationdto?.iznosBezPdv}}</td>
             <td>{{art?.postoRabataArtikla}} %</td>
             <td>{{art?.calculationdto?.rabat}}</td>
-            <td>{{art?.calculationdto?.iznosRabatBezPdv}} KM</td>
+            <td>{{art?.calculationdto?.iznosRabatBezPdv}}</td>
             <td>{{art?.calculationdto?.pdv}}</td>
             <td>{{art?.calculationdto?.ukupno}} KM</td>
             <td><button (click)="UpdateArtikal(art.artikalId)" class="btnPregled">Izmjena</button></td>

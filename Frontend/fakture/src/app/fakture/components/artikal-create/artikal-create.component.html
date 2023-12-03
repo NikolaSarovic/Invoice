@@ -1,3 +1,12 @@
+<div *ngIf="responseAlert.success" class="alertObavjest" id="alert">
+  <img src="../../../../assets/images/success.png" alt="success">
+  <span>{{responseAlert.message}}</span>
+</div>
+<div *ngIf="responseAlert.error" class="alertObavjest" id="alert" style="background-color: red;">
+  <img src="../../../../assets/images/error.png" alt="error">
+  <span>{{responseAlert.message}}</span>
+</div>
+
 <h1 mat-dialog-title>Novi artiakl</h1>
 <div mat-dialog-content class="matContent">
     Dodavanje podataka o novom artiklu
@@ -16,6 +25,7 @@
             <input matInput formControlName="kolicina">
             <mat-error *ngIf="form.controls['kolicina'].errors?.['required']">Prazno polje</mat-error>
             <mat-error *ngIf="form.controls['kolicina'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+            <mat-error *ngIf="form.controls['kolicina'].errors?.['pattern']">Pogresno unesen broj</mat-error>
         </mat-form-field>
        </div>     
        <div>
@@ -24,6 +34,7 @@
             <input matInput formControlName="cijena">
             <mat-error *ngIf="form.controls['cijena'].errors?.['required']">Prazno polje</mat-error>
             <mat-error *ngIf="form.controls['cijena'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+            <mat-error *ngIf="form.controls['cijena'].errors?.['pattern']">Pogresno unesen broj</mat-error>
         </mat-form-field>
        </div>     
          <div>
@@ -32,6 +43,7 @@
                 <input matInput formControlName="postoRabataArtikla">
                 <mat-error *ngIf="form.controls['postoRabataArtikla'].errors?.['required']">Prazno polje</mat-error>
                 <mat-error *ngIf="form.controls['postoRabataArtikla'].errors?.['maxlength']">Previse cifra uneseno</mat-error>
+                <mat-error *ngIf="form.controls['postoRabataArtikla'].errors?.['pattern']">Pogresno unesen broj</mat-error>
             </mat-form-field>
         </div>          
   </form>

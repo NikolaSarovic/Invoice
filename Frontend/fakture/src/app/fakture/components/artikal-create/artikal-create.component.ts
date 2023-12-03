@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { artikliData } from 'app/fakture/models/DataModels';
+import { ResponseAlert, artikliData } from 'app/fakture/models/DataModels';
 import { FaktureService } from 'app/fakture/services/fakture.service';
 
 
@@ -34,10 +34,16 @@ export class ArtikalCreateComponent {
 
   form=this.fb.group({
     nazivArtikla:this.fb.control('',Validators.required) ,
-    kolicina:this.fb.control('',[Validators.required,Validators.maxLength(10)]),
-    cijena:this.fb.control('',[Validators.required,Validators.maxLength(10)]),
-    postoRabataArtikla:this.fb.control('',[Validators.required,Validators.maxLength(10)]), 
+    kolicina:this.fb.control('',[Validators.required,Validators.maxLength(10),Validators.maxLength(10),Validators.pattern("[0-9]+")]),
+    cijena:this.fb.control('',[Validators.required,Validators.maxLength(10),Validators.maxLength(10),Validators.pattern("^(\\d*\\.)?\\d+$")]),
+    postoRabataArtikla:this.fb.control('',[Validators.required,Validators.maxLength(10),Validators.maxLength(10),Validators.pattern("^(\\d*\\.)?\\d+$")]), 
   })
+
+  responseAlert:ResponseAlert={
+    error:false,
+    success:false,
+    message:""
+    }
 
   CreateArtikal() {
     this.artikalData={
@@ -47,16 +53,35 @@ export class ArtikalCreateComponent {
       postoRabataArtikla:this.form.value.postoRabataArtikla as unknown as number,
     }
     this.service.createArtikal(this.fakturaId,this.artikalData).subscribe((response:any)=>{
-         if(response?.success==true)
-         {
-           console.log(response.message)
-         }
-         if(response?.success==false)
-         {
-           console.log(response.message)
-         }
-    })
-    setTimeout(()=>{window.location.reload()},500)
+      this.responseAlert.message="Uspjesno dodato";
+      this.responseAlert.success=true;
+      console.log(this.responseAlert.message)
+      setTimeout(()=>{
+        const box=document.getElementById('alert');
+        console.log(box)
+        if (box != null) {
+          this.responseAlert.success=false;
+          box.style.display = 'inline-block';
+           }
+         },1500)
+         setTimeout(()=>{window.location.reload()},500)
+    },
+      (error:any)=> {
+      console.log("sou program")
+      this.responseAlert.message="Neuspjesno dodato";
+      this.responseAlert.error=true;
+      setTimeout(()=>{
+       const box=document.getElementById('alert');
+       console.log(box)
+        if (box != null) {
+        this.responseAlert.error=false;
+        box.style.display = 'inline-block';
+        }
+         },1500)
+      }
+    )
+    
+    
   }
 
 }

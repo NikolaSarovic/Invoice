@@ -5,7 +5,7 @@
     text-align: center;
     width: 350px;
     height: 560px;
-    top: 15%;
+    top: 21%;
     left: 40%;
     display: inline;
 }
@@ -14,9 +14,24 @@
     margin-bottom:15px;
     
 }
+
 h1 {
     letter-spacing: 10px;
     color: dimgrey;
     font-size: 34px;
     font-family: system-ui;
+}
+
+#alertRegister {
+    border-radius: 40px;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+    margin-top: 37px;
+    display: inline-block;
+    position: relative;
+    top: 50px;
+    left:40%;
+    border: 2px solid white;
 }
